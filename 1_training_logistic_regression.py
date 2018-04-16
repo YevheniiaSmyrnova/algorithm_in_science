@@ -52,15 +52,14 @@ with driver.session() as session:
             can_provide_angular_knowledge, angular_knowledge, can_help """
         )
         training_data = pd.DataFrame([{k: v for k, v in r.items()} for r in result])
-print "Test data set information"
-print training_data
+print "Test data set information:"
 print training_data.info()
 
 # Make test data set
 # X_data - matrix with features columns
 # Y_data - matrix with responses columns
-features_columns = [x for x in training_data.columns if x not in ['developer_can_help', 'developer', 'can_help']]
-responses_columns = ['can_help']
+features_columns = [x for x in training_data.columns if x not in ["developer_can_help", "developer", "can_help"]]
+responses_columns = ["can_help"]
 X_data = training_data[features_columns]
 Y_data = training_data[responses_columns]
 
@@ -71,15 +70,15 @@ model = LogisticRegression()
 model.fit(X_data, y)
 
 # New data set and predict
-new_data = pd.DataFrame(data={'can_provide_django_knowledge': [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
-                              'can_provide_angular_knowledge': [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
-                              'django_knowledge': [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
-                              'angular_knowledge': [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)]})
+new_data = pd.DataFrame(data={"can_provide_django_knowledge": [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
+                              "can_provide_angular_knowledge": [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
+                              "django_knowledge": [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)],
+                              "angular_knowledge": [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)]})
 print "New data set:"
 print new_data
 
 model.predict(new_data)
 output = model.predict_proba(new_data)[:, 1]
-output_data = pd.DataFrame({'can_help': output})
+output_data = pd.DataFrame({"can_help": output})
 print "Our prediction:"
 print output_data

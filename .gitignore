@@ -2,3 +2,4 @@
 .ipynb_checkpoints/
 .venv/
 linear_regression_model.pkl
+prediction_model.pkl
